@@ -51,6 +51,7 @@ class App extends React.Component {
         localStorage.setItem('user_name', userName);
         localStorage.setItem('first_name', firstName);
         localStorage.setItem('last_name', lastName);
+        localStorage.setItem('photo', photo);
         this.setState({
             isLogon: true,
             firstName: firstName,
@@ -65,14 +66,15 @@ class App extends React.Component {
         this.setState(initState);
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         let userId = localStorage.getItem('user_id');
         if (userId != null) {
             this.setState({
                 isLogon: true,
                 firstName: localStorage.getItem('first_name'),
                 lastName: localStorage.getItem('last_name'),
-                userId: userId
+                userId: userId,
+                photo:  localStorage.getItem('photo')
             });
         }
         else
