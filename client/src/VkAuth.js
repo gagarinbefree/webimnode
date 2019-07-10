@@ -3,13 +3,9 @@ import 'jquery/dist/jquery.min.js'
 import 'bootstrap/dist/js/bootstrap.min.js'
 import Server from './Server';
 
-class VkAuth extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
+class VkAuth extends React.Component {  
     render() {
-        return <div className="modal fade show" tabindex="-1" role="dialog" style={{ display: 'block' }}>
+        return <div className="modal fade show" tabIndex="-1" role="dialog" style={{ display: 'block' }}>
             <div className="modal-dialog modal-sm" role="document">
                 <div className="modal-content">
                     <div className="modal-header alert-primary">
@@ -33,12 +29,12 @@ class VkAuth extends React.Component {
         </div>
     }
 
-    async login() {
-        let username = this.nameInput.value;
-        let password = this.passwordInput.value;
-
+    async login() {        
         try
         {
+            let username = this.nameInput.value;
+            let password = this.passwordInput.value;
+
             let user = await Server.login(username, password);
             let photo = await Server.getUserPhoto(user.user_id);
 

@@ -13,7 +13,7 @@ class Server {
     }
 
     static async getUserPhoto(userId) {
-        const response = await fetch('http://localhost:3001/users/photo/' + userId, {
+        const response = await fetch('http://localhost:3001/users/' + userId + '/photo', {
             method: 'GET',
             headers: {
                 Accept: 'text/plain',
@@ -22,6 +22,18 @@ class Server {
         });
         
         return await response.json(); 
+    }
+
+    static async getUserFriends(userId) {
+        const response = await fetch('http://localhost:3001/users/' + userId + '/friends/5', {
+            method: 'GET',
+            headers: {
+                Accept: 'text/plain',
+                'Content-Type': 'text/plain',
+            }
+        });
+        
+        return await response.json();
     }
 }
 

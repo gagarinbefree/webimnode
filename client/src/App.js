@@ -1,8 +1,8 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import VkAuth from './VkAuth'
 import 'bootstrap/dist/css/bootstrap.css';
+import Friends from './Friends';
 
 const initState = {
     isLogon: false,
@@ -16,16 +16,16 @@ class App extends React.Component {
     constructor(props) {
         super(props);
 
-        localStorage.clear();       
+        //localStorage.clear();       
         this.state = initState;
     }
 
     render() {
         if (this.state.isLogon) {
             return <React.Fragment>
-                <nav class="navbar navbar-dark bg-primary">
-                    <div class="navbar-brand">
-                        <img className="rounded-circle" src={this.state.photo} width="30" height="30" class="d-inline-block align-top rounded-circle" alt=""></img>
+                <nav className="navbar navbar-dark bg-primary">
+                    <div className="navbar-brand">
+                        <img src={this.state.photo} width="30" height="30" className="d-inline-block align-top rounded-circle" alt=""></img>
                         <strong className="ml-3">{this.state.firstName + " " + this.state.lastName}</strong>
                     </div>
                     <div className="navbar-right cursor-pointer" onClick={() => this.logout()}>
@@ -34,16 +34,15 @@ class App extends React.Component {
                 </nav>
                 <div className="d-flex align-items-center justify-content-center h-100 mt-3">
                     <div className="d-flex flex-column">
-                        
+                        <Friends userId={this.state.userId} />                        
                     </div>
                 </div>
             </React.Fragment>
         }
         else {
-            return <div>
-                <div className="App">VK Friends</div>
+            return <React.Fragment>
                 <VkAuth login={(userName, userId, firstName, lastName, photo) => this.login(userName, userId, firstName, lastName, photo)} logout={() => this.logout()}/>
-            </div>
+            </React.Fragment>
         }
     }    
 
@@ -67,40 +66,18 @@ class App extends React.Component {
     }
 
     componentDidMount() {
-        /*let userId = localStorage.getItem('user_id');
+        let userId = localStorage.getItem('user_id');
         if (userId != null) {
             this.setState({
                 isLogon: true,
                 firstName: localStorage.getItem('first_name'),
                 lastName: localStorage.getItem('last_name'),
-                userId: userId,
-                photo: ""
+                userId: userId
             });
         }
         else
-            this.setState(initState);*/
-    }
-
-    async loadUserPhoto() {
-        try
-        {
-            const response = await fetch('http://localhost:3001/users/photo/' + this.state.userId, {
-                method: 'GET',
-                headers: {
-                    Accept: 'text/plain',
-                    'Content-Type': 'text/plain',
-                }
-            });
-            const result = await response.json(); 
-            
-            console.log(result);
-
-            //this.props.login(username, result.user_id, result.first_name, result.last_name);
-        }
-        catch(e) {            
-            this.logout();
-        }
-    }
+            this.setState(initState);
+    }    
 }
 
 export default App;

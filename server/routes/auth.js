@@ -1,12 +1,9 @@
-﻿//'use strict';
+﻿'use strict';
 var express = require('express');
 var router = express.Router();
-//var VK = require('vksdk');
-var bodyParser = require('body-parser');
 var easyvk = require('easyvk');
 var Promise = require('promise');
 var Datastore = require('nedb');
-
 
 router.post('/login', function (req, res) {
     var body = JSON.parse(req.body);
@@ -44,12 +41,10 @@ router.post('/login', function (req, res) {
                 user_id: user_id
             };
 
-            if (docs.length == 0) {
+            if (docs.length == 0)
                 db.insert(dto);
-            }
-            else {
+            else
                 db.update(condition, dto, {});
-            }
 
             res.send(200, JSON.stringify({
                 user_id: user_id,
