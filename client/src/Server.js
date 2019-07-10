@@ -1,6 +1,8 @@
 class Server {
+    static domain = 'https://webimnode.herokuapp.com';
+
     static async login(username, password) {
-        const response = await fetch('http://localhost:3001/auth/login', {
+        const response = await fetch(this.domain + '/auth/login', {
             method: 'POST',
             body: JSON.stringify({ username: username, password: password }),
             headers: {
@@ -13,7 +15,7 @@ class Server {
     }
 
     static async getUserPhoto(userId) {
-        const response = await fetch('http://localhost:3001/users/' + userId + '/photo', {
+        const response = await fetch(this.domain + '/users/' + userId + '/photo', {
             method: 'GET',
             headers: {
                 Accept: 'text/plain',
@@ -25,7 +27,7 @@ class Server {
     }
 
     static async getUserFriends(userId) {
-        const response = await fetch('http://localhost:3001/users/' + userId + '/friends/5', {
+        const response = await fetch(this.domain + '/users/' + userId + '/friends/5', {
             method: 'GET',
             headers: {
                 Accept: 'text/plain',
