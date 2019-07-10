@@ -55,7 +55,8 @@ class App extends React.Component {
             isLogon: true,
             firstName: firstName,
             lastName: lastName,
-            userId: userId
+            userId: userId,
+            photo: photo
         });        
     }
 
