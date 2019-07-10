@@ -51,6 +51,7 @@ class App extends React.Component {
         localStorage.setItem('user_name', userName);
         localStorage.setItem('first_name', firstName);
         localStorage.setItem('last_name', lastName);
+        localStorage.setItem('photo', photo);
         this.setState({
             isLogon: true,
             firstName: firstName,
@@ -72,7 +73,8 @@ class App extends React.Component {
                 isLogon: true,
                 firstName: localStorage.getItem('first_name'),
                 lastName: localStorage.getItem('last_name'),
-                userId: userId
+                userId: userId,
+                photo: localStorage.getItem('photo'),
             });
         }
         else
@@ -81,3 +83,4 @@ class App extends React.Component {
 }
 
 export default App;
+
